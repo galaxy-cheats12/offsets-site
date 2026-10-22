@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nullpoint — Products</title>
+<title>nullpoint — Products</title>
 <style>
   :root {
     --bg: #050507;
@@ -16,7 +16,6 @@
     --accent-2: #a06bff;
     --radius: 16px;
     
-    /* Badges */
     --badge-online-bg: rgba(34, 197, 94, 0.15);
     --badge-online-text: #4ade80;
     --badge-testing-bg: rgba(234, 179, 8, 0.15);
@@ -59,11 +58,7 @@
     box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
   }
 
-  .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
+  .nav-left { display: flex; align-items: center; gap: 2rem; }
 
   .brand {
     font-weight: 700;
@@ -76,227 +71,183 @@
     gap: 0.5rem;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-  
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  
+  .nav-links { display: flex; gap: 1.5rem; font-size: 0.85rem; font-weight: 500; }
+  .nav-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+  .nav-right { display: flex; align-items: center; gap: 0.75rem; }
 
   .btn-login {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    transition: color 0.2s;
+    display: flex; align-items: center; gap: 0.5rem;
+    background: transparent; border: none;
+    color: var(--muted); font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; padding: 0.5rem 1rem; transition: color 0.2s;
   }
-  
   .btn-login:hover { color: var(--text); }
 
   .btn-download {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.6rem 1.25rem;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+    color: var(--text); font-size: 0.85rem; font-weight: 600;
+    padding: 0.6rem 1.25rem; border-radius: 999px;
+    text-decoration: none; transition: background 0.2s, transform 0.2s;
   }
+  .btn-download:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1060px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+  /* ── HOME VIEW ── */
+  #view-home { animation: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
   
-  .btn-download:hover {
-    background: rgba(255,255,255,0.12);
-    transform: translateY(-1px);
-  }
-
-  /* ── MAIN LAYOUT ── */
-  .container {
-    max-width: 1060px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 6rem;
-  }
-
   .scroll-indicator {
-    text-align: center;
-    color: var(--accent);
-    margin-bottom: 2rem;
-    animation: bounce 2s infinite;
+    text-align: center; color: var(--accent);
+    margin-bottom: 2rem; animation: bounce 2s infinite;
   }
-  
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
     40% { transform: translateY(-10px); }
     60% { transform: translateY(-5px); }
   }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-  /* ── FREE CARD ── */
   .free-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 3rem;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem; margin-bottom: 3rem;
     transition: background 0.2s;
   }
-  
   .free-card:hover { background: var(--panel-hover); }
 
   .badge-free {
-    display: inline-block;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    color: #c9d1d9;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 0.25rem 0.6rem;
-    border-radius: 999px;
-    margin-bottom: 1rem;
+    display: inline-block; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: #c9d1d9; font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.05em; padding: 0.25rem 0.6rem; border-radius: 999px; margin-bottom: 1rem;
   }
+  .free-card h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .free-card p { font-size: 0.9rem; color: var(--muted); }
 
-  .free-card h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .free-card p {
-    font-size: 0.9rem;
-    color: var(--muted);
-  }
-
-  /* ── SECTION HEADERS ── */
   .section-head {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem;
   }
 
-  /* ── GAME GRID ── */
   .game-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
   }
 
   .game-card {
-    position: relative;
-    border-radius: var(--radius);
-    overflow: hidden;
-    text-decoration: none;
-    aspect-ratio: 16/9;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1.25rem;
-    border: 1px solid var(--border);
+    position: relative; border-radius: var(--radius); overflow: hidden;
+    text-decoration: none; aspect-ratio: 16/9;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.25rem; border: 1px solid var(--border);
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
-    cursor: pointer;
-    background: #111;
+    cursor: pointer; background: #111;
   }
+  .game-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8); }
 
-  .game-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
-  }
-
-  /* background image */
   .game-card .bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    z-index: 0;
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); z-index: 0;
   }
-  
   .game-card:hover .bg { transform: scale(1.05); }
 
-  /* dark gradient overlay so text stays readable */
   .game-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content: ""; position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(5,5,7,0.9) 0%, rgba(5,5,7,0.4) 50%, transparent 100%);
-    z-index: 1;
-    pointer-events: none;
+    z-index: 1; pointer-events: none;
   }
 
-  .game-card-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .game-card h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-  }
+  .game-card-content { position: relative; z-index: 2; }
+  .game-card h3 { font-size: 1rem; font-weight: 600; color: #fff; }
 
   .badge-status {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    padding: 0.25rem 0.6rem;
-    border-radius: 999px;
-    backdrop-filter: blur(4px);
+    position: absolute; top: 1rem; right: 1rem; z-index: 2;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.03em;
+    padding: 0.25rem 0.6rem; border-radius: 999px; backdrop-filter: blur(4px);
   }
+  .badge-online { background: var(--badge-online-bg); color: var(--badge-online-text); border: 1px solid rgba(34, 197, 94, 0.2); }
+  .badge-testing { background: var(--badge-testing-bg); color: var(--badge-testing-text); border: 1px solid rgba(234, 179, 8, 0.2); }
 
-  .badge-online {
-    background: var(--badge-online-bg);
-    color: var(--badge-online-text);
-    border: 1px solid rgba(34, 197, 94, 0.2);
+  /* ── PRODUCT VIEW ── */
+  #view-product { display: none; animation: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); text-decoration: none; font-size: 0.9rem;
+    margin-bottom: 2rem; transition: color 0.2s;
   }
+  .back-btn:hover { color: var(--text); }
 
-  .badge-testing {
-    background: var(--badge-testing-bg);
-    color: var(--badge-testing-text);
-    border: 1px solid rgba(234, 179, 8, 0.2);
+  .product-hero { margin-bottom: 2.5rem; }
+  .product-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em;
+    margin: 0.75rem 0;
+    background: linear-gradient(120deg, #fff 30%, #b7c4ff 70%, #d9b8ff 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   }
+  .product-hero .tagline { color: var(--muted); font-size: 1.1rem; max-width: 620px; }
 
-  /* ── RESPONSIVE ── */
+  .product-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2.5rem;
+    backdrop-filter: blur(18px); box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2rem;
+  }
+  .feature {
+    display: flex; gap: 14px; padding: 1.1rem; border-radius: 12px;
+    border: 1px solid transparent; transition: background 0.25s, border-color 0.25s;
+  }
+  .feature:hover { background: var(--panel-hover); border-color: var(--border); }
+  .feature .icon {
+    flex: none; width: 40px; height: 40px; border-radius: 10px;
+    display: grid; place-items: center; font-size: 1.1rem;
+    background: linear-gradient(135deg, rgba(91,140,255,0.15), rgba(160,107,255,0.15));
+    border: 1px solid var(--border);
+  }
+  .feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+  .feature p { font-size: 0.85rem; color: var(--muted); }
+
+  .purchase-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; flex-wrap: wrap;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .price-block { display: flex; flex-direction: column; }
+  .price-label { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .price { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+
+  .buy-btn {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; font-size: 0.95rem; font-weight: 600; color: #fff;
+    text-decoration: none; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 10px 30px -10px rgba(91,140,255,0.7);
+    transition: transform 0.2s, box-shadow 0.2s; overflow: hidden;
+  }
+  .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px rgba(91,140,255,0.85); }
+  .buy-btn::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+    transform: translateX(-120%); transition: transform 0.7s;
+  }
+  .buy-btn:hover::before { transform: translateX(120%); }
+
+  /* responsive */
   @media (max-width: 900px) {
     .game-grid { grid-template-columns: repeat(2, 1fr); }
-    .nav-links { display: none; } /* hide links on mobile */
+    .nav-links { display: none; }
   }
-  
   @media (max-width: 600px) {
     .game-grid { grid-template-columns: 1fr; }
     .header-wrap { padding: 1rem; }
     nav { padding: 0.5rem; }
     .nav-left { gap: 1rem; }
-    .brand { font-size: 1rem; }
+    .product-card { padding: 1.5rem; }
   }
 </style>
 </head>
@@ -305,8 +256,7 @@
   <header class="header-wrap">
     <nav>
       <div class="nav-left">
-        <a href="#" class="brand">
-          <!-- Simple geometric logo mark -->
+        <a href="#/" class="brand">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="white"/>
             <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -315,7 +265,7 @@
           nullpoint
         </a>
         <div class="nav-links">
-          <a href="#">Products</a>
+          <a href="#/">Products</a>
           <a href="#">Guides</a>
           <a href="#">Docs</a>
           <a href="#">Store</a>
@@ -338,76 +288,175 @@
 
   <main class="container">
     
-    <div class="scroll-indicator">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-    </div>
+    <!-- HOME VIEW -->
+    <section id="view-home">
+      <div class="scroll-indicator">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </div>
 
-    <div class="free-card">
-      <span class="badge-free">FREE</span>
-      <h2>Free Version</h2>
-      <p>Explore all free games and editions, including Nullpoint Lite for CS2 and test environments.</p>
-    </div>
+      <div class="free-card">
+        <span class="badge-free">FREE</span>
+        <h2>Free Version</h2>
+        <p>Explore all free games and editions, including Nullpoint Lite for CS2 and test environments.</p>
+      </div>
 
-    <div class="section-head">Explore our games</div>
+      <div class="section-head">Explore our games</div>
 
-    <div class="game-grid">
+      <div class="game-grid">
+        <a href="#/product/fortnite" class="game-card">
+          <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=800');"></div>
+          <span class="badge-status badge-online">Online</span>
+          <div class="game-card-content"><h3>Fortnite</h3></div>
+        </a>
 
-      <!-- FORTNITE -->
-      <a href="#/product/fortnite" class="game-card">
-        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=800');"></div>
-        <span class="badge-status badge-online">Online</span>
-        <div class="game-card-content">
-          <h3>Fortnite</h3>
-        </div>
+        <a href="#/product/cs2" class="game-card">
+          <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800');"></div>
+          <span class="badge-status badge-online">Online</span>
+          <div class="game-card-content"><h3>Counter-Strike 2</h3></div>
+        </a>
+
+        <a href="#/product/rust" class="game-card">
+          <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&q=80&w=800');"></div>
+          <span class="badge-status badge-testing">Testing</span>
+          <div class="game-card-content"><h3>Rust</h3></div>
+        </a>
+
+        <a href="#/product/apex" class="game-card">
+          <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1614294149010-950b698f72c0?auto=format&fit=crop&q=80&w=800');"></div>
+          <span class="badge-status badge-online">Online</span>
+          <div class="game-card-content"><h3>Apex Legends</h3></div>
+        </a>
+
+        <a href="#/product/valorant" class="game-card">
+          <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=800');"></div>
+          <span class="badge-status badge-online">Online</span>
+          <div class="game-card-content"><h3>Valorant</h3></div>
+        </a>
+
+        <a href="#/product/roblox" class="game-card">
+          <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800');"></div>
+          <span class="badge-status badge-online">Online</span>
+          <div class="game-card-content"><h3>Roblox</h3></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- PRODUCT VIEW -->
+    <section id="view-product">
+      <a href="#/" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        Back to products
       </a>
 
-      <!-- CS2 -->
-      <a href="#/product/cs2" class="game-card">
-        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800');"></div>
-        <span class="badge-status badge-online">Online</span>
-        <div class="game-card-content">
-          <h3>Counter-Strike 2</h3>
-        </div>
-      </a>
+      <div class="product-hero">
+        <span class="badge-status badge-online" id="pv-status" style="position:static; display:inline-block; margin-bottom:1rem;">Online</span>
+        <h1 id="pv-title">Game Title</h1>
+        <p class="tagline" id="pv-tagline">Short description.</p>
+      </div>
 
-      <!-- RUST -->
-      <a href="#/product/rust" class="game-card">
-        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&q=80&w=800');"></div>
-        <span class="badge-status badge-testing">Testing</span>
-        <div class="game-card-content">
-          <h3>Rust</h3>
+      <div class="product-card">
+        <div class="features-grid">
+          <div class="feature"><div class="icon">◆</div><div><h3>ESP / Visuals</h3><p>Full player and item ESP with custom colors.</p></div></div>
+          <div class="feature"><div class="icon">⚡</div><div><h3>Aimbot</h3><p>Silent aim, FOV control, and dynamic smoothing.</p></div></div>
+          <div class="feature"><div class="icon">◈</div><div><h3>Misc</h3><p>Radar, no-recoil, speedhack, and more.</p></div></div>
+          <div class="feature"><div class="icon">↯</div><div><h3>Instant Delivery</h3><p>License key on the success page, seconds after checkout.</p></div></div>
         </div>
-      </a>
 
-      <!-- APEX -->
-      <a href="#/product/apex" class="game-card">
-        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1614294149010-950b698f72c0?auto=format&fit=crop&q=80&w=800');"></div>
-        <span class="badge-status badge-online">Online</span>
-        <div class="game-card-content">
-          <h3>Apex Legends</h3>
+        <div class="purchase-row">
+          <div class="price-block">
+            <span class="price-label">Price</span>
+            <div class="price" id="pv-price">$19 <span style="font-size:0.9rem;font-weight:400;color:var(--muted);">USD · one-time</span></div>
+          </div>
+          <a class="buy-btn" id="pv-buy" href="#">Buy now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
-      </a>
+      </div>
+    </section>
 
-      <!-- VALORANT -->
-      <a href="#/product/valorant" class="game-card">
-        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=800');"></div>
-        <span class="badge-status badge-online">Online</span>
-        <div class="game-card-content">
-          <h3>Valorant</h3>
-        </div>
-      </a>
-
-      <!-- ROBLOX -->
-      <a href="#/product/roblox" class="game-card">
-        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800');"></div>
-        <span class="badge-status badge-online">Online</span>
-        <div class="game-card-content">
-          <h3>Roblox</h3>
-        </div>
-      </a>
-
-    </div>
   </main>
 
+  <script>
+    // Product Registry
+    const PRODUCTS = {
+      'cs2': {
+        title: 'Counter-Strike 2',
+        tagline: 'External ESP, aimbot, RCS, and misc — undetected and updated weekly.',
+        price: '$19',
+        status: 'Online',
+        buyUrl: 'https://yourname.gumroad.com/l/cs2-pro'
+      },
+      'fortnite': {
+        title: 'Fortnite',
+        tagline: 'Aimbot, ESP, radar, and silent aim for the latest patch.',
+        price: '$25',
+        status: 'Online',
+        buyUrl: 'https://yourname.gumroad.com/l/fortnite-pro'
+      },
+      'rust': {
+        title: 'Rust',
+        tagline: 'Full ESP, silent aim, and resource multipliers. Currently in testing.',
+        price: '$30',
+        status: 'Testing',
+        buyUrl: 'https://yourname.gumroad.com/l/rust-pro'
+      },
+      'apex': {
+        title: 'Apex Legends',
+        tagline: 'ESP, aimbot, and movement exploits for Apex.',
+        price: '$20',
+        status: 'Online',
+        buyUrl: 'https://yourname.gumroad.com/l/apex-pro'
+      },
+      'valorant': {
+        title: 'Valorant',
+        tagline: 'Undetected internal cheat. Aimbot and ESP.',
+        price: '$35',
+        status: 'Online',
+        buyUrl: 'https://yourname.gumroad.com/l/valorant-pro'
+      },
+      'roblox': {
+        title: 'Roblox',
+        tagline: 'Script executor and ESP for popular Roblox games.',
+        price: '$10',
+        status: 'Online',
+        buyUrl: 'https://yourname.gumroad.com/l/roblox-pro'
+      }
+    };
+
+    function showProduct(id) {
+      const p = PRODUCTS[id];
+      if (!p) { showHome(); return; }
+
+      document.getElementById('pv-title').textContent = p.title;
+      document.getElementById('pv-tagline').textContent = p.tagline;
+      document.getElementById('pv-price').innerHTML = `${p.price} <span style="font-size:0.9rem;font-weight:400;color:var(--muted);">USD · one-time</span>`;
+      document.getElementById('pv-buy').href = p.buyUrl;
+      
+      const badge = document.getElementById('pv-status');
+      badge.textContent = p.status;
+      badge.className = p.status === 'Testing' ? 'badge-status badge-testing' : 'badge-status badge-online';
+
+      document.getElementById('view-home').style.display = 'none';
+      document.getElementById('view-product').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+
+    function showHome() {
+      document.getElementById('view-home').style.display = 'block';
+      document.getElementById('view-product').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
+
+    function route() {
+      const hash = location.hash || '#/';
+      const match = hash.match(/^#\/product\/([\w-]+)$/);
+      if (match) showProduct(match[1]);
+      else showHome();
+    }
+
+    window.addEventListener('hashchange', route);
+    // run on initial load
+    route();
+  </script>
 </body>
 </html>
