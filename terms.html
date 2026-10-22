@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e6e8ef;
+    --muted: #8a8f9e;
+    --accent: #5b8cff;
+    --accent-2: #a06bff;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.7;
+    min-height: 100vh; position: relative; overflow-x: hidden;
+  }
+  body::before {
+    content: ""; position: fixed; inset: -20%; z-index: -1;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(91,140,255,0.14), transparent 45%),
+      radial-gradient(circle at 85% 10%, rgba(160,107,255,0.10), transparent 45%);
+    filter: blur(60px);
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 0 2.5rem;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; letter-spacing: -0.02em; font-size: 1.05rem;
+    text-decoration: none; color: var(--text);
+  }
+  .brand .mark {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 4px 16px -4px rgba(91,140,255,.6);
+  }
+  .nav-links { display: flex; gap: 1.5rem; font-size: 0.9rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2.5rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,.6);
+  }
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: .5rem;
+    background: linear-gradient(120deg, #fff 30%, #b7c4ff 70%, #d9b8ff 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .updated { color: var(--muted); font-size: .85rem; margin-bottom: 2rem; }
+  h2 {
+    font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em;
+    margin: 2rem 0 .75rem; color: var(--text);
+  }
+  h2:first-of-type { margin-top: 1rem; }
+  p { color: #c2c6d2; margin-bottom: 1rem; font-size: .95rem; }
+  ul { margin: .5rem 0 1rem 1.25rem; color: #c2c6d2; font-size: .95rem; }
+  li { margin-bottom: .35rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { color: var(--text); font-weight: 600; }
+
+  footer {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    padding-top: 3rem; font-size: .85rem; color: var(--muted);
+  }
+  footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  footer a:hover { color: var(--text); }
+  .links { display: flex; gap: 1.25rem; }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <nav>
+    <a href="/" class="brand"><span class="mark"></span> Store</a>
+    <div class="nav-links">
+      <a href="/">Products</a>
+      <a href="/terms.html">Terms</a>
+      <a href="mailto:you@example.com">Contact</a>
+    </div>
+  </nav>
+
+  <article class="card">
+    <h1>Terms of Service</h1>
+    <p class="updated">Last updated: October 23, 2026</p>
+
+    <h2>1. Acceptance of terms</h2>
+    <p>By accessing or purchasing from this website (the "Service"), you agree to these Terms of Service. If you do not agree, do not use the Service. These terms form a binding agreement between you ("Buyer") and [YOUR NAME OR BUSINESS ENTITY] ("Seller", "we", "us").</p>
+
+    <h2>2. Products and license</h2>
+    <p>All products sold through the Service are digital goods delivered electronically. Upon purchase, the Seller grants the Buyer a <strong>personal, non-exclusive, non-transferable, revocable license</strong> to use the purchased software for personal, non-commercial purposes on one machine. This license does not transfer ownership of the software. The Buyer may not:</p>
+    <ul>
+      <li>Resell, redistribute, sublicense, or share the software or license key with any third party</li>
+      <li>Reverse engineer, decompile, or disassemble the software except to the extent permitted by applicable law</li>
+      <li>Modify, adapt, or create derivative works from the software</li>
+      <li>Use the software in any manner that violates the terms of service of any third-party product, platform, or service</li>
+    </ul>
+
+    <h2>3. Payment and delivery</h2>
+    <p>Payment is processed by a third-party payment processor. All prices are listed in USD and are subject to change without notice. Upon successful payment, the Buyer receives a license key or download link by email, or on the payment processor's confirmation page. Delivery is typically immediate but may be delayed by the payment processor's fraud review.</p>
+
+    <h2>4. Refund policy</h2>
+    <p>Because all products are digital goods delivered immediately upon purchase, <strong>all sales are final</strong>. The Seller does not offer refunds except where required by applicable law. If a product fails to function as described due to a defect on the Seller's side, the Seller may, at its sole discretion, issue a replacement build, a license key, or a refund. Refund requests for reasons other than defect will not be honored. Chargebacks filed without prior contact will result in permanent revocation of the license and may be disputed with the payment processor.</p>
+
+    <h2>5. No warranty</h2>
+    <p>The products are provided <strong>"as is"</strong> without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement. The Seller does not warrant that the products will be error-free, uninterrupted, or compatible with any particular version, platform, or configuration of any third-party software. <strong>The Seller does not guarantee that use of the products will not result in account suspension, ban, or termination by any third party.</strong></p>
+
+    <h2>6. Limitation of liability</h2>
+    <p>To the maximum extent permitted by applicable law, the Seller shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenue, whether incurred directly or indirectly, arising from the use or inability to use the products. The Seller's total liability for any claim arising from or relating to these terms or the Service shall not exceed the amount paid by the Buyer for the product giving rise to the claim.</p>
+
+    <h2>7. Buyer responsibilities</h2>
+    <p>The Buyer is solely responsible for:</p>
+    <ul>
+      <li>Complying with all applicable laws and the terms of service of any platform on which the products are used</li>
+      <li>Any consequences of using the products, including but not limited to account bans, hardware bans, or termination of access to third-party services</li>
+      <li>Keeping their license key confidential</li>
+    </ul>
+
+    <h2>8. Acceptable use</h2>
+    <p>The Buyer agrees not to use the Service or its products for any illegal purpose, to harass or harm any person, to distribute malware, or to violate any applicable law. The Seller reserves the right to revoke a license without refund for violation of this section.</p>
+
+    <h2>9. Intellectual property</h2>
+    <p>All content on the Service, including but not limited to the software, code, design, text, and graphics, is the property of the Seller or its licensors and is protected by copyright and other intellectual property laws. The Buyer acquires no right, title, or interest in the Service other than the limited license granted in Section 2.</p>
+
+    <h2>10. Third-party services</h2>
+    <p>The Service may contain links to or integrate with third-party services (payment processors, hosting, email delivery). The Seller is not responsible for the practices or content of those third parties. The Buyer's use of those services is governed by their respective terms.</p>
+
+    <h2>11. Modifications</h2>
+    <p>The Seller reserves the right to modify these Terms at any time. Changes take effect when posted. Continued use of the Service after a change constitutes acceptance of the revised Terms.</p>
+
+    <h2>12. Termination</h2>
+    <p>The Seller may suspend or terminate the Buyer's access to the Service or any license at any time, with or without notice, for violation of these Terms or for any other reason at the Seller's sole discretion. Sections 5, 6, 9, and 13 survive termination.</p>
+
+    <h2>13. Governing law</h2>
+    <p>These Terms are governed by the laws of [YOUR JURISDICTION], without regard to its conflict-of-law provisions. Any dispute arising from these Terms or the Service shall be resolved in the courts of [YOUR JURISDICTION].</p>
+
+    <h2>14. Contact</h2>
+    <p>Questions about these Terms may be sent to <a href="mailto:you@example.com">you@example.com</a>.</p>
+  </article>
+
+  <footer>
+    <div>© 2026 Your Name</div>
+    <div class="links">
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="mailto:you@example.com">Contact</a>
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>
