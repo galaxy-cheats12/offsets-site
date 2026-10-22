@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product — modern storefront</title>
+<title>Store</title>
 <style>
   :root {
     --bg: #0a0a0f;
@@ -17,242 +17,405 @@
     --radius: 18px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { min-height: 100%; }
   body {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    overflow-x: hidden; position: relative; min-height: 100vh;
   }
-  /* ambient gradient backdrop */
   body::before {
-    content: "";
-    position: fixed;
-    inset: -20%;
+    content: ""; position: fixed; inset: -20%; z-index: -1;
     background:
-      radial-gradient(circle at 15% 20%, rgba(91, 140, 255, 0.18), transparent 45%),
-      radial-gradient(circle at 85% 10%, rgba(160, 107, 255, 0.14), transparent 45%),
-      radial-gradient(circle at 50% 100%, rgba(91, 140, 255, 0.10), transparent 55%);
-    filter: blur(60px);
-    z-index: -1;
-    animation: drift 24s ease-in-out infinite alternate;
+      radial-gradient(circle at 15% 20%, rgba(91,140,255,0.18), transparent 45%),
+      radial-gradient(circle at 85% 10%, rgba(160,107,255,0.14), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(91,140,255,0.10), transparent 55%);
+    filter: blur(60px); animation: drift 24s ease-in-out infinite alternate;
   }
   @keyframes drift {
-    0%   { transform: translate3d(0,0,0) scale(1); }
+    0% { transform: translate3d(0,0,0) scale(1); }
     100% { transform: translate3d(-3%, 2%, 0) scale(1.05); }
   }
 
-  .wrap {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 5rem 1.5rem 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
 
-  /* hero */
-  .hero { text-align: center; animation: rise 0.7s cubic-bezier(.2,.8,.2,1) both; }
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    background: var(--panel);
-    padding: 6px 14px;
-    border-radius: 999px;
-    backdrop-filter: blur(10px);
-    margin-bottom: 1.5rem;
+  /* top nav */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 0 2.5rem;
   }
-  .eyebrow .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 10px var(--accent);
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; letter-spacing: -0.02em; font-size: 1.05rem;
+    text-decoration: none; color: var(--text);
   }
-  h1 {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    background: linear-gradient(120deg, #fff 30%, #b7c4ff 70%, #d9b8ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .brand .mark {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 4px 16px -4px rgba(91,140,255,.6);
   }
-  .lede {
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 560px;
-    margin: 0 auto;
-  }
+  .nav-links { display: flex; gap: 1.5rem; font-size: 0.9rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
 
-  /* glass card */
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.04);
-    animation: rise 0.8s 0.1s cubic-bezier(.2,.8,.2,1) both;
-  }
+  /* shared animations */
   @keyframes rise {
     from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .grid {
+  /* ===== HOME VIEW ===== */
+  .hero { text-align: center; margin-bottom: 3rem; animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--border); background: var(--panel);
+    padding: 6px 14px; border-radius: 999px; backdrop-filter: blur(10px);
+    margin-bottom: 1.25rem;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem;
+    background: linear-gradient(120deg, #fff 30%, #b7c4ff 70%, #d9b8ff 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .lede { font-size: 1.05rem; color: var(--muted); max-width: 560px; margin: 0 auto; }
+
+  /* loader download card — first thing on home */
+  .loader-card {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; flex-wrap: wrap;
+    background: linear-gradient(135deg, rgba(91,140,255,0.12), rgba(160,107,255,0.08));
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem 1.75rem;
+    backdrop-filter: blur(18px);
+    margin-bottom: 3rem;
+    animation: rise .8s .05s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .loader-card .lc-text h2 { font-size: 1.15rem; margin-bottom: .25rem; }
+  .loader-card .lc-text p { font-size: .88rem; color: var(--muted); }
+  .dl-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 24px; border-radius: 12px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    color: var(--text); text-decoration: none; font-weight: 600; font-size: .92rem;
+    transition: background .2s, transform .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .dl-btn:hover { background: rgba(255,255,255,0.11); transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
+
+  /* section header */
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+  .section-head h2 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+  .section-head span { font-size: .85rem; color: var(--muted); }
+
+  /* game section */
+  .game-block { margin-bottom: 2.5rem; }
+  .game-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1rem;
+  }
+  .game-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+  .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1rem;
-    margin-bottom: 2rem;
   }
+  .product {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem;
+    backdrop-filter: blur(18px);
+    transition: background .25s, border-color .25s, transform .25s, box-shadow .25s;
+    position: relative; overflow: hidden;
+  }
+  .product::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(91,140,255,0.12), transparent 60%);
+    opacity: 0; transition: opacity .3s;
+  }
+  .product:hover {
+    background: var(--panel-hover); border-color: rgba(255,255,255,0.16);
+    transform: translateY(-3px); box-shadow: 0 20px 40px -20px rgba(0,0,0,.7);
+  }
+  .product:hover::before { opacity: 1; }
+  .product .p-tag {
+    display: inline-block; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid rgba(91,140,255,0.3);
+    background: rgba(91,140,255,0.08);
+    padding: 3px 9px; border-radius: 999px; margin-bottom: .85rem;
+  }
+  .product h3 { font-size: 1.02rem; font-weight: 600; margin-bottom: .35rem; letter-spacing: -0.01em; }
+  .product p  { font-size: .85rem; color: var(--muted); margin-bottom: 1rem; }
+  .product .p-foot { display: flex; align-items: center; justify-content: space-between; }
+  .product .p-price { font-weight: 700; font-size: 1.05rem; }
+  .product .p-arrow { color: var(--muted); transition: transform .2s, color .2s; }
+  .product:hover .p-arrow { transform: translateX(3px); color: var(--accent); }
+
+  /* ===== PRODUCT VIEW ===== */
+  #product-view { display: none; animation: rise .6s cubic-bezier(.2,.8,.2,1) both; }
+  #home-view.is-hidden { display: none; }
+
+  .back {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); text-decoration: none; font-size: .88rem;
+    margin-bottom: 2rem; transition: color .2s;
+  }
+  .back:hover { color: var(--text); }
+
+  .product-hero { margin-bottom: 2.5rem; }
+  .product-hero h1 {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    background: linear-gradient(120deg, #fff 30%, #b7c4ff 70%, #d9b8ff 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin: .75rem 0;
+  }
+  .product-hero .tagline { color: var(--muted); max-width: 620px; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
   .feature {
-    display: flex;
-    gap: 14px;
-    padding: 1.1rem;
-    border-radius: 14px;
+    display: flex; gap: 14px; padding: 1.1rem; border-radius: 14px;
     border: 1px solid transparent;
-    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    transition: background .25s, border-color .25s, transform .25s;
   }
-  .feature:hover {
-    background: var(--panel-hover);
-    border-color: var(--border);
-    transform: translateY(-2px);
-  }
+  .feature:hover { background: var(--panel-hover); border-color: var(--border); transform: translateY(-2px); }
   .icon {
-    flex: none;
-    width: 40px; height: 40px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
+    flex: none; width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center; font-size: 1.1rem;
     background: linear-gradient(135deg, rgba(91,140,255,0.18), rgba(160,107,255,0.18));
     border: 1px solid var(--border);
-    font-size: 1.1rem;
   }
-  .feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
-  .feature p  { font-size: 0.85rem; color: var(--muted); }
+  .feature h3 { font-size: .95rem; font-weight: 600; margin-bottom: 2px; }
+  .feature p  { font-size: .85rem; color: var(--muted); }
 
-  /* purchase row */
   .purchase {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; flex-wrap: wrap;
+    padding-top: 1.5rem; border-top: 1px solid var(--border);
   }
   .price-block { display: flex; flex-direction: column; }
-  .price-label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .price-label { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .price { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-  .price span { font-size: 0.95rem; font-weight: 400; color: var(--muted); }
-
+  .price span { font-size: .95rem; font-weight: 400; color: var(--muted); }
   .buy {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 30px;
-    font-size: 0.98rem;
-    font-weight: 600;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 12px;
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; font-size: .98rem; font-weight: 600; color: #fff;
+    text-decoration: none; border-radius: 12px;
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    box-shadow: 0 10px 30px -10px rgba(91, 140, 255, 0.7);
-    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 10px 30px -10px rgba(91,140,255,.7);
+    transition: transform .2s, box-shadow .2s, filter .2s;
     overflow: hidden;
   }
   .buy::before {
-    content: "";
-    position: absolute; inset: 0;
-    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
-    transform: translateX(-120%);
-    transition: transform 0.7s;
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.25) 50%, transparent 70%);
+    transform: translateX(-120%); transition: transform .7s;
   }
-  .buy:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 40px -10px rgba(91, 140, 255, 0.85);
-    filter: brightness(1.05);
-  }
+  .buy:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px rgba(91,140,255,.85); filter: brightness(1.05); }
   .buy:hover::before { transform: translateX(120%); }
 
-  /* footer */
   footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-top: 1rem;
-    font-size: 0.85rem;
-    color: var(--muted);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    padding-top: 3rem; font-size: .85rem; color: var(--muted);
   }
-  footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
   footer a:hover { color: var(--text); }
   .links { display: flex; gap: 1.25rem; }
 </style>
 </head>
 <body>
-  <main class="wrap">
+<main class="wrap">
 
-    <section class="hero">
-      <div class="eyebrow"><span class="dot"></span> v1.0 · digital download</div>
+  <nav>
+    <a href="#/" class="brand"><span class="mark"></span> Store</a>
+    <div class="nav-links">
+      <a href="#/">Products</a>
+      <a href="/terms.html">Terms</a>
+      <a href="mailto:you@example.com">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ============ HOME VIEW ============ -->
+  <section id="home-view">
+
+    <div class="hero">
+      <div class="eyebrow"><span class="dot"></span> updated for latest patch</div>
       <h1>Product Name</h1>
-      <p class="lede">A one-line description that tells a buyer exactly what this is and why it earns its price. No filler.</p>
-    </section>
+      <p class="lede">A short pitch — what it is, who it's for, why it's worth the price. No filler.</p>
+    </div>
 
-    <section class="card">
+    <!-- LOADER DOWNLOAD — top of home -->
+    <div class="loader-card">
+      <div class="lc-text">
+        <h2>Loader</h2>
+        <p>Required for all products. Download and run before checkout.</p>
+      </div>
+      <!-- GitHub Releases "latest" URL — always serves newest loader.zip -->
+      <a class="dl-btn" href="https://github.com/USERNAME/store/releases/latest/download/loader.zip" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download loader
+      </a>
+    </div>
+
+    <div class="section-head">
+      <h2>Products</h2>
+      <span>by game</span>
+    </div>
+
+    <!-- ===== CS2 ===== -->
+    <div class="game-block">
+      <div class="game-title">Counter-Strike 2</div>
+      <div class="products">
+        <a class="product" href="#/product/cs2-pro">
+          <span class="p-tag">Internal</span>
+          <h3>CS2 Pro</h3>
+          <p>ESP, aimbot, RCS, and misc — full external suite.</p>
+          <div class="p-foot">
+            <span class="p-price">$19</span>
+            <svg class="p-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+        </a>
+        <a class="product" href="#/product/cs2-lite">
+          <span class="p-tag">Lite</span>
+          <h3>CS2 Lite</h3>
+          <p>ESP-only build. No aimbot, no override.</p>
+          <div class="p-foot">
+            <span class="p-price">$9</span>
+            <svg class="p-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ===== FORTNITE ===== -->
+    <div class="game-block">
+      <div class="game-title">Fortnite</div>
+      <div class="products">
+        <a class="product" href="#/product/fortnite-pro">
+          <span class="p-tag">Internal</span>
+          <h3>Fortnite Pro</h3>
+          <p>Aimbot, ESP, radar — with silent aim.</p>
+          <div class="p-foot">
+            <span class="p-price">$25</span>
+            <svg class="p-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ PRODUCT VIEW ============ -->
+  <section id="product-view">
+    <a href="#/" class="back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      Back to products
+    </a>
+
+    <div class="product-hero">
+      <span class="p-tag" id="pv-tag" style="display:inline-block;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(91,140,255,.3);background:rgba(91,140,255,.08);padding:3px 9px;border-radius:999px;margin-bottom:.85rem;">Internal</span>
+      <h1 id="pv-title">CS2 Pro</h1>
+      <p class="tagline" id="pv-tagline">Full external suite — ESP, aimbot, RCS, misc.</p>
+    </div>
+
+    <div class="card">
       <div class="grid">
-        <div class="feature">
-          <div class="icon">◆</div>
-          <div><h3>Feature One</h3><p>What it does, in one clear line.</p></div>
-        </div>
-        <div class="feature">
-          <div class="icon">⚡</div>
-          <div><h3>Feature Two</h3><p>Why it matters to the buyer.</p></div>
-        </div>
-        <div class="feature">
-          <div class="icon">◈</div>
-          <div><h3>Feature Three</h3><p>The differentiator — the part that sells.</p></div>
-        </div>
-        <div class="feature">
-          <div class="icon">↯</div>
-          <div><h3>Instant Delivery</h3><p>Download link on the success page, seconds after checkout.</p></div>
-        </div>
+        <div class="feature"><div class="icon">◆</div><div><h3>Feature One</h3><p>What it does, in one clear line.</p></div></div>
+        <div class="feature"><div class="icon">⚡</div><div><h3>Feature Two</h3><p>Why it matters to the buyer.</p></div></div>
+        <div class="feature"><div class="icon">◈</div><div><h3>Feature Three</h3><p>The differentiator.</p></div></div>
+        <div class="feature"><div class="icon">↯</div><div><h3>Instant Delivery</h3><p>License key on the success page, seconds after checkout.</p></div></div>
       </div>
 
       <div class="purchase">
         <div class="price-block">
           <span class="price-label">Price</span>
-          <div class="price">$19 <span>USD · one-time</span></div>
+          <div class="price"><span id="pv-price-num">$19</span> <span>USD · one-time</span></div>
         </div>
-        <!-- Replace with your Gumroad / Lemon Squeezy / Stripe Checkout URL -->
-        <a class="buy" href="https://yourname.gumroad.com/l/product-slug">
-          Buy now
+        <a class="buy" id="pv-buy" href="#">Buy now
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <div>© 2026 Your Name</div>
-      <div class="links">
-        <a href="/terms.html">Terms</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="mailto:you@example.com">Contact</a>
-      </div>
-    </footer>
+  <footer>
+    <div>© 2026 Your Name</div>
+    <div class="links">
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="mailto:you@example.com">Contact</a>
+    </div>
+  </footer>
 
-  </main>
+</main>
+
+<script>
+  // Product registry — one entry per product card.
+  const PRODUCTS = {
+    'cs2-pro': {
+      tag: 'Internal',
+      title: 'CS2 Pro',
+      tagline: 'Full external suite — ESP, aimbot, RCS, misc.',
+      price: '$19',
+      buyUrl: 'https://yourname.gumroad.com/l/cs2-pro'
+    },
+    'cs2-lite': {
+      tag: 'Lite',
+      title: 'CS2 Lite',
+      tagline: 'ESP-only build. No aimbot, no override.',
+      price: '$9',
+      buyUrl: 'https://yourname.gumroad.com/l/cs2-lite'
+    },
+    'fortnite-pro': {
+      tag: 'Internal',
+      title: 'Fortnite Pro',
+      tagline: 'Aimbot, ESP, radar — with silent aim.',
+      price: '$25',
+      buyUrl: 'https://yourname.gumroad.com/l/fortnite-pro'
+    }
+  };
+
+  function showProduct(id) {
+    const p = PRODUCTS[id];
+    if (!p) { showHome(); return; }
+    document.getElementById('pv-tag').textContent = p.tag;
+    document.getElementById('pv-title').textContent = p.title;
+    document.getElementById('pv-tagline').textContent = p.tagline;
+    document.getElementById('pv-price-num').textContent = p.price;
+    document.getElementById('pv-buy').href = p.buyUrl;
+
+    document.getElementById('home-view').classList.add('is-hidden');
+    document.getElementById('product-view').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  function showHome() {
+    document.getElementById('home-view').classList.remove('is-hidden');
+    document.getElementById('product-view').style.display = 'none';
+    window.scrollTo(0, 0);
+  }
+
+  function route() {
+    const hash = location.hash || '#/';
+    const match = hash.match(/^#\/product\/([\w-]+)$/);
+    if (match) showProduct(match[1]);
+    else showHome();
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
+</script>
+
 </body>
 </html>
