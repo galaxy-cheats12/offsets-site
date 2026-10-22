@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Game Offsets</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0d1117; color: #c9d1d9; padding: 2rem; margin: 0; }
+        h1 { border-bottom: 1px solid #30363d; padding-bottom: .5rem; font-weight: 400; }
+        .game-selector { margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 8px; }
+        .game-btn { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: 0.15s; }
+        .game-btn:hover { background: #30363d; }
+        .game-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+        .meta { color: #8b949e; font-size: 0.9rem; margin-bottom: 1rem; min-height: 1.2em; }
+        table { width: 100%; border-collapse: collapse; background: #161b22; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.4); }
+        th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid #30363d; }
+        th { background: #21262d; font-weight: 600; color: #f0f6fc; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #1c2128; }
+        code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; background: #0d1117; padding: 2px 6px; border-radius: 4px; border: 1px solid #30363d; }
+        .note { color: #8b949e; font-size: 0.85rem; margin-top: 1rem; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Game Offsets</h1>
+    <div class="game-selector" id="game-selector"></div>
+    <div class="meta" id="status">Select a game to load offsets.</div>
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Offset / Value</th></tr>
+        </thead>
+        <tbody id="offsets-body"></tbody>
+    </table>
+    <div class="note" id="note"></div>
+
+    <script>
+        // Define games and their source URLs
+        // Only CS2 has a verified, stable, public JSON endpoint.
+        const GAMES = {
+            cs2: {
+                name: 'CS2',
+                url: 'https://raw.githubusercontent.com/a2x/cs2-dumper/main/output/offsets.json',
+                note: 'Source: a2x/cs2-dumper (auto-updated)'
+            },
+            rust: {
+                name: 'Rust',
+                url: null, // No reliable public JSON
+                note: 'No stable public JSON source found. Requires local dumper execution (e.g., Rust-Data / OxideDumper).'
+            },
+            fortnite: {
+                name: 'Fortnite',
+                url: null, // Pearlism/offsets is outdated (v33.20, early 2025)
+                note: 'No actively maintained public JSON. Existing repos (Pearlism/offsets) are outdated or header-only.'
+            },
+            apex: {
+                name: 'Apex Legends',
+                url: null, // CApexDumpWasm requires uploading a PE dump, not a live JSON
+                note: 'CApexDumpWasm is a browser-based PE dump parser, not a live offset API. No public JSON endpoint.'
+            },
+            roblox: {
+                name: 'Roblox',
+                url: null, // NtReadVirtualMemory has offsets.json but it's for a specific version and may not be stable/raw
+                note: 'NtReadVirtualMemory/Roblox-Offsets-Website exists but data is version-specific and not designed as a public API.'
+            },
+            r6: {
+                name: 'Rainbow Six Siege',
+                url: null,
+                note: 'No public JSON. Projects like ebrahim37/r6-dumper are local tools, not hosted APIs.'
+            },
+            pubg: {
+                name: 'PUBG',
+                url: null,
+                note: 'CalvinXu17/JD_DMA has offsets.json but it is for a specific DMA tool and not an official API.'
+            },
+            fivem: {
+                name: 'FiveM',
+                url: null,
+                note: 'yfz/fivem-offset-dumper and Master-Dream404 repos are local tools / JSON dumps, not stable public APIs.'
+            },
+            valorant: {
+                name: 'Valorant',
+                url: null,
+                note: 'No public offset API. Android_UE_Dumper_CN supports Valorant(CN) but requires local execution.'
+            }
+        };
+
+        let currentGame = 'cs2';
+
+        function renderSelector() {
+            const container = document.getElementById('game-selector');
+            container.innerHTML = '';
+            Object.entries(GAMES).forEach(([key, cfg]) => {
+                const btn = document.createElement('button');
+                btn.className = 'game-btn' + (key === currentGame ? ' active' : '');
+                btn.textContent = cfg.name;
+                btn.onclick = () => {
+                    currentGame = key;
+                    renderSelector();
+                    loadOffsets();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        async function loadOffsets() {
+            const statusEl = document.getElementById('status');
+            const tbody = document.getElementById('offsets-body');
+            const noteEl = document.getElementById('note');
+            const game = GAMES[currentGame];
+
+            tbody.innerHTML = '';
+            noteEl.textContent = game.note || '';
+
+            if (!game.url) {
+                statusEl.textContent = `${game.name}: No live public source available.`;
+                return;
+            }
+
+            statusEl.textContent = `Fetching ${game.name} offsets...`;
+
+            try {
+                const response = await fetch(game.url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+
+                const entries = Object.entries(data);
+                if (entries.length === 0) {
+                    statusEl.textContent = `${game.name}: No data received.`;
+                    return;
+                }
+
+                entries.forEach(([name, value]) => {
+                    const tr = document.createElement('tr');
+                    const tdName = document.createElement('td');
+                    tdName.innerHTML = `<code>${name}</code>`;
+                    const tdValue = document.createElement('td');
+                    const hexValue = typeof value === 'number' ? '0x' + value.toString(16).toUpperCase() : String(value);
+                    tdValue.innerHTML = `<code>${hexValue}</code>`;
+                    tr.appendChild(tdName);
+                    tr.appendChild(tdValue);
+                    tbody.appendChild(tr);
+                });
+
+                statusEl.textContent = `${game.name}: ${entries.length} offsets loaded · ${new Date().toLocaleString()}`;
+            } catch (e) {
+                statusEl.textContent = `${game.name}: Failed to load (${e.message}).`;
+            }
+        }
+
+        renderSelector();
+        loadOffsets();
+    </script>
+</body>
+</html>
